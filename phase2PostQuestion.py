@@ -1,6 +1,16 @@
 from pymongo import MongoClient
 from datetime import date
 import pymongo
+def createId():
+  empty = False
+  counter =400728
+  while(empty == False):
+    if(db.Posts.find_one({"Id":str(counter)}) == None):
+      empty =True
+      break
+    counter = counter +1
+  return counter
+
 uid = "11" #change it later
 url = "mongodb://localhost:" + str(50001)
 client = MongoClient(url)
@@ -13,8 +23,9 @@ tagsArray = tags.split(" ")
 tagString = "<"+"><".join(tagsArray)+">"
 postTypeId = 1
 today = str(date.today())
-Id = str(int(db.Posts.find_one(sort=[("Id",pymongo.DESCENDING)])['Id'])+1)
-print(db.Posts.find_one(sort=[("Id",pymongo.DESCENDING)]))
+#Id = str(int(db.Posts.find_one(sort=[("Id",pymongo.DESCENDING)])['Id'])+1)
+Id = str(createId())
+print("The id is" + Id)
 question =  {
         "Id": Id,
         "PostTypeId": "1",
@@ -35,8 +46,10 @@ question =  {
         "ContentLicense": "CC BY-SA 2.5"
       }
 postsCollection = db["Posts"]
-postsCollection.insert_one(question)
-print(db.Posts.find_one(sort=[("Id",pymongo.DESCENDING)]))
+postsCollection.insert(question)
+
+
+
 
 
 
