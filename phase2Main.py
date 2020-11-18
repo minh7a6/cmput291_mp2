@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from phase2PostQuestion import postQuestion
 def printMenue():
         print("1: Post a Question")
         print("2: Search for a Post")
@@ -9,7 +10,7 @@ db = client["291db"]
 postsCollection = db["Posts"]
 Uid = input("Please input your userId, if you do not wish to do so just press enter ")
 if Uid !="":
-    questionCount = len(list(db.Posts.find({"Id":Uid},{"PostTypeId": "1"})))
+    questionCount = len(list(db.Posts.find({"OwnerUserId":Uid},{"PostTypeId": "1"})))
     print("Number of questions "+ str(questionCount))
     cur = db.Posts.find({ "$and" : [ {"Id":Uid}, { "PostTypeId": "1"} ] })
     cumScore =0
@@ -27,5 +28,6 @@ if Uid !="":
     print("Number of votes registered for the user "+str(votesCount))
 printMenue()
 nextStep = input("Please select what you would like to do next: ")
-#if nextStep == "1":
+if nextStep == "1":
+    postQuestion(Uid,db)
 #if nextStep == "2":  
