@@ -3,7 +3,7 @@ from datetime import date
 import pymongo
 def createId():
   empty = False
-  counter =400728
+  counter = 400728
   while(empty == False):
     if(db.Posts.find_one({"Id":str(counter)}) == None):
       empty =True
