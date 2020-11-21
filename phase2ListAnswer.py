@@ -34,10 +34,13 @@ def listAns(db, qid):
             if(int(opt) > len(list)):
                 print("Wrong Option")
             else:
-                return(list[int(opt) - 1])
+                chosenId = list[int(opt) - 1]
+                x = postCol.find_one({"Id": chosenId})
+                for i in x:
+                    print(i + ": " + str(x[i])) 
+                return chosenId
         else:
             print("Wrong Option")
-
 
 def func_test():
     url = "mongodb://localhost:50001"
