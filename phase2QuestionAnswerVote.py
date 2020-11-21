@@ -14,9 +14,11 @@ def vote(db,pid,uid):
     checkVote = False
     if uid != "":
         checkVote = db.Votes.find_one({"$and": [{"VoteTypeId":"2"},{"UserId": uid},{"PostId":pid}]}) == None # true if user has not voted on post
-        print(db.Votes.find_one({"$and": [{"VoteTypeId":"2"},{"UserId": uid},{"PostId":pid}]}) == None)
+        #print(db.Votes.find_one({"$and": [{"VoteTypeId":"2"},{"UserId": uid},{"PostId":pid}]}) == None)
     if(checkVote == True  or uid ==""):
-        today = datetime.datetime.now()
+        today = str(datetime.datetime.now())
+        today = today[:-3]
+        today ='T'.join(today.split())
         id = str(createId(db))
         vote = {}
         if(uid ==""):
@@ -24,7 +26,7 @@ def vote(db,pid,uid):
             "Id": id,
             "PostId": pid,
             "VoteTypeId": "2",
-            "CreationDate": str(today)
+            "CreationDate": today
         }
         else:
             vote = {
@@ -32,11 +34,11 @@ def vote(db,pid,uid):
                 "PostId": pid,
                 "VoteTypeId": "2",
                 "UserId": uid,
-                "CreationDate": str(today)
+                "CreationDate": today
             }
         votesCollection = db["Votes"]
         votesCollection.insert(vote)
-        #print(db.Votes.find_one({"$and": [{"Id":id},{"UserId": uid}]}))
+        #print(db.Votes.find_one({"$and": [{"Id":id}]}))
         #db.Votes.find_one({"Id":pid})
         score = db.Posts.find_one({"Id":pid})["Score"]+1
         #print(db.Posts.find_one({"Id":pid})["Score"])
@@ -49,6 +51,6 @@ if __name__ == "__main__":
     url = "mongodb://localhost:" + str(50001)
     client = MongoClient(url)
     db = client["291db"]
-    pid = "1"
-    uid = ""
+    pid = "132"
+    uid = "1"
     vote(db,pid,uid)
