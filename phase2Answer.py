@@ -1,22 +1,13 @@
 # from pymongo import MongoClient
 import pymongo
 import datetime
-
-
+from bson.objectid import ObjectId
 def giveAns(uid, db, qid):
     post = db["Posts"]
-    x = post.find().sort([("Id", pymongo.DESCENDING)]).limit(1)
-    Id = None
-    for i in x:
-       Id = i["Id"]
-    newId = int(Id) + 1
-    print(newId)
     body = input("What is the body of the answer?: ")
     Answer = {
-        "Id": str(newId),
         "PostTypeId": "2",
         "CreationDate": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000"),
-        "LastActivityDate": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000"),
         "ContentLicense": "CC BY-SA 2.5",
         "Body": body,
         "Score": 0,
@@ -27,7 +18,11 @@ def giveAns(uid, db, qid):
         Answer['OwnerUserId'] = str(uid)
     print(Answer)
     x = post.insert_one(Answer)
-    print(x.inserted_id)
+    newId = str(x.inserted_id)
+    filter = {"_id": ObjectId(newId)}
+    newvalues = { "$set": { 'Id': newId } } 
+    post.update_one(filter, newvalues)
+    print("Success!")
 
 
 def func_test():
