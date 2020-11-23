@@ -34,11 +34,11 @@ def listAns(db, qid):
                 print(script)
                 list.append(i["_id"])
                 index += 1
-            else: 
-                script = str(index) + " || " + truncate(i["Body"]) + " || " + i["CreationDate"] + " || " + str(i["Score"])
-                print(script)
-                list.append(i["_id"])
-                index += 1
+        else: 
+            script = str(index) + " || " + truncate(i["Body"]) + " || " + i["CreationDate"] + " || " + str(i["Score"])
+            print(script)
+            list.append(i["_id"])
+            index += 1
     if len(list) == 0:
         return print("There are no answer for this question")
     while True:
