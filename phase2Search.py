@@ -38,9 +38,9 @@ def SearchQuestion(db):
                     pass
                 else:
                     while True:
-                        choice = input("Please choose question {0} - {1}: ".format(index - 25, index - 1))
+                        choice = input("Please choose question {0} - {1}: ".format(1, index - 1))
                         if choice.isnumeric():
-                            if int(choice) >= index - 25 and int(choice) < index:
+                            if int(choice) >= 1 and int(choice) < index:
                                 return disp_w_update(temp_res[int(choice) - 1], postColl)
                             else:
                                 print("Wrong Option")
@@ -72,9 +72,9 @@ def SearchQuestion(db):
                 temp_res.append(i["_id"])
                 index += 1
                 while True:
-                    choice = input("Please choose question {0} - {1}: ".format(0, index - 1))
+                    choice = input("Please choose question {0} - {1}: ".format(1, index - 1))
                     if choice.isnumeric():
-                        if int(choice) >= 0 and int(choice) < index:
+                        if int(choice) >= 1 and int(choice) < index:
                             return disp_w_update(temp_res[int(choice) - 1], postColl)
                         else:
                             print("Wrong Option")

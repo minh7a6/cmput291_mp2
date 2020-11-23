@@ -17,14 +17,14 @@ def listAns(db, qid):
         acceptedAns = postCol.find_one({"Id": id},{"Id": 1, "CreationDate": 1, "Score": 1, "Body": 1})
         script = str(index) + " || " + truncate(acceptedAns["Body"]) + " || " + acceptedAns["CreationDate"] + " || " + str(acceptedAns["Score"]) + " *"
         print(script)
-        list.append(acceptedAns["Id"])
+        list.append(acceptedAns["_id"])
         index += 1
     x = postCol.find({"ParentId": qid, "PostTypeId": "2"},{"Id": 1, "CreationDate": 1, "Score": 1, "Body": 1})
     for i in x:
         if i["Id"] != id:
             script = str(index) + " || " + truncate(i["Body"]) + " || " + i["CreationDate"] + " || " + str(i["Score"])
             print(script)
-            list.append(i["Id"])
+            list.append(i["_id"])
             index += 1
     if len(list) == 0:
         return print("There are no answer for this question")
@@ -35,10 +35,10 @@ def listAns(db, qid):
                 print("Wrong Option")
             else:
                 chosenId = list[int(opt) - 1]
-                x = postCol.find_one({"Id": chosenId})
+                x = postCol.find_one({"_id": chosenId})
                 for i in x:
-                    print(i + ": " + str(x[i])) 
-                return chosenId
+                    print(i + ": " + str(x[i]))
+                return x["Id"]
         else:
             print("Wrong Option")
 
