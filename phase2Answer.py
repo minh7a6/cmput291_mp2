@@ -4,6 +4,7 @@ import datetime
 from bson.objectid import ObjectId
 def giveAns(uid, db, qid):
     post = db["Posts"]
+    print("----------------------------------------- Give Answer -----------------------------------------")
     body = input("What is the body of the answer?: ")
     Answer = {
         "PostTypeId": "2",
@@ -14,9 +15,9 @@ def giveAns(uid, db, qid):
         "CommentCount": 0,
         "ParentId": str(qid)
     }
-    if uid is not None:
+    if uid != "":
         Answer['OwnerUserId'] = str(uid)
-    print(Answer)
+    # print(Answer)
     x = post.insert_one(Answer)
     newId = str(x.inserted_id)
     filter = {"_id": ObjectId(newId)}
@@ -29,4 +30,4 @@ def func_test():
     url = "mongodb://localhost:50001"
     client = pymongo.MongoClient(url)
     giveAns(None,client["291db"], "1")
-func_test()
+# func_test()

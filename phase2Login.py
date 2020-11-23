@@ -36,4 +36,4 @@ def func_test():
     url = "mongodb://localhost:" + str(50001)
     client = MongoClient(url)
     print(login(client["291db"]))
-func_test()
+# func_test()

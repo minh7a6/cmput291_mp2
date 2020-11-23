@@ -74,7 +74,8 @@ def QuestionScreen(qid, uid, db):
             giveAns(uid, db, qid)
         elif choice == "2":
             aid = listAns(db, qid)
-            AnswerScreen(aid, uid, db)
+            if aid is not None:
+                AnswerScreen(aid, uid, db)
         elif choice == "3":
             vote(db, qid, uid)
         elif choice == "4":

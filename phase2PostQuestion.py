@@ -42,12 +42,10 @@ def postQuestion(uid,db):
     question =  {
           "Id": Id,
           "PostTypeId": "1",
-          "AcceptedAnswerId": "0",
           "CreationDate": today,
           "Score": 0,
           "ViewCount": 0,
           "Body": body,
-          "LastEditorUserId": uid,
           "LastEditDate": today,
           "LastActivityDate":today,
           "Title": title,
@@ -61,7 +59,6 @@ def postQuestion(uid,db):
     question =  {
             "Id": Id,
             "PostTypeId": "1",
-            "AcceptedAnswerId": "0",
             "CreationDate": today,
             "Score": 0,
             "ViewCount": 0,
@@ -89,8 +86,6 @@ def postQuestion(uid,db):
         "Id": str(tagId),
         "TagName": tag,
         "Count": 1,
-        "ExcerptPostId": "332392", #dont know wat to fill
-        "WikiPostId": "332391" #dont know wat to fill
       }
       TagsCollection = db["Tags"]
       TagsCollection.insert(tags)
