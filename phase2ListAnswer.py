@@ -14,7 +14,7 @@ def checkNone(args):
 def listAns(db, qid):
     postCol = db["Posts"]
     x = postCol.find_one({"Id": qid},{"AcceptedAnswerId": 1, "_id": 0})
-    print(x)
+    print("Listing Answers....")
     print("No || Body || CreationDate || Score")
     index = 1
     list = []
@@ -59,4 +59,5 @@ def func_test():
     url = "mongodb://localhost:50001"
     client = pymongo.MongoClient(url)
     print(listAns(client["291db"], "29"))
-# func_test()
+if __name__ == "__main__":
+    func_test()

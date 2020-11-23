@@ -14,6 +14,7 @@ def disp_w_update(args, postColl):
     return ans["Id"]
 
 def SearchQuestion(db):
+    print("\r\n------------------------------------------------- Search Menu -------------------------------------------------\r\n")
     keyword_arr = input("Please enter your keywords for searching the Question: ")
     postColl = db["Posts"]
     print("Please wait...")

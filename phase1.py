@@ -41,8 +41,6 @@ def phase1(args):
             for j in file_data[i]:
                 break
             collection.insert_many(file_data[i][j])
-            if(collection == db["Posts"]):
-                print("Text Indexing Post")
-                collection.create_index([("Body", "text"), ("Tags", "text"), ("Title","text")])
+
 if __name__ == "__main__":
     phase1(sys.argv)

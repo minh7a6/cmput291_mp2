@@ -90,6 +90,9 @@ def main_menu():
     url = "mongodb://localhost:" + str(port)
     client = MongoClient(url)
     db = client["291db"]
+    collection = db["Posts"]
+    print("Please wait, we are indexing post for searching...")
+    collection.create_index([("Body", "text"), ("Tags", "text"), ("Title","text")])
     uid = login(db)
     while True:
         print("-------------------------- Main Menu -------------------------- ")
