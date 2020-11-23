@@ -1,6 +1,5 @@
 import json
 from pymongo import MongoClient
-from tqdm import tqdm
 import sys
 from os import path
 def phase1(args):
@@ -41,8 +40,9 @@ def phase1(args):
                 break
             for j in file_data[i]:
                 break
-            collection.insert(file_data[i][j])
+            collection.insert_many(file_data[i][j])
             if(collection == db["Posts"]):
+                print("Text Indexing Post")
                 collection.create_index([("Body", "text"), ("Tags", "text"), ("Title","text")])
 if __name__ == "__main__":
     phase1(sys.argv)

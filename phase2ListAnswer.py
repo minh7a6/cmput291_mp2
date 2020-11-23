@@ -1,5 +1,5 @@
 import pymongo
-
+import time
 def truncate(args):
     if len(args) > 80:
         return args[:80] + "..."

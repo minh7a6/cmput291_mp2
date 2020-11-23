@@ -16,12 +16,15 @@ def disp_w_update(args, postColl):
 def SearchQuestion(db):
     keyword_arr = input("Please enter your keywords for searching the Question: ")
     postColl = db["Posts"]
+    print("Please wait...")
     x = postColl.find({"PostTypeId": "1", 
                         "$text": {"$search": str(keyword_arr), "$caseSensitive": False}}, 
                         {"_id": 1, "Id": 1, "Title": 1, "CreationDate": 1, "Score": 1, "AnswerCount": 1, 
                         "score": { "$meta": "textScore" }}).sort([("score", {"$meta": "textScore"})])
     y = list(x)
     temp_res = []
+
+    print("{0} results found".format(len(y)))
     print("No || Title || Creation Date || Score || Ans Count")
     index = 1
     while len(y) > 0:
@@ -86,4 +89,6 @@ def func_test():
     url = "mongodb://localhost:" + str(50001)
     client = MongoClient(url)
     print(SearchQuestion(client["291db"]))
-# func_test()
+    
+if __name__ == "__main__":
+    func_test()
