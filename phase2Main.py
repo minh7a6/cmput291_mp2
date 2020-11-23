@@ -91,6 +91,7 @@ def main_menu():
     db = client["291db"]
     uid = login(db)
     while True:
+        print("-------------------------- Main Menu -------------------------- ")
         print("Hello! What would you like to do today?")
         print("1: Post a Question")
         print("2: Seach for Question")
