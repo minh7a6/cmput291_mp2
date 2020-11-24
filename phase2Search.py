@@ -32,7 +32,7 @@ def SearchQuestion(db):
         if len(y) > 25:
             if len(y[index - 1:]) > 25:
                 start = index - 1
-                end = index - 1 +25
+                end = index - 1 + 25
                 for i in y[start:end]:
                     script = str(index) + " || " + str(i["Title"]) + " || " + i["CreationDate"]
                     script += " || " + str(i["Score"]) + " || " + str(i["AnswerCount"])
@@ -71,7 +71,7 @@ def SearchQuestion(db):
                         print("Wrong Option") 
                 
         else:
-            for i in x:
+            for i in y:
                 script = str(index) + " || " + str(i["Title"]) + " || " + i["CreationDate"]
                 script += " || " + str(i["Score"]) + " || " + str(i["AnswerCount"])
                 print(script)
