@@ -52,7 +52,7 @@ def SearchQuestion(db):
                             print("Wrong Option") 
             else:
                 start = index
-                for i in y[index - 1:]:
+                for i in y[start - 1:]:
                     script = str(index) + " || " + str(i["Title"]) + " || " + i["CreationDate"]
                     script += " || " + str(i["Score"]) + " || " + str(i["AnswerCount"])
                     print(script)
