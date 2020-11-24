@@ -79,7 +79,7 @@ def postQuestion(uid,db):
   #print(db.Posts.find_one({"Id":str(Id)}))
   for tag in tagsArray:
     checkTag = db.Tags.find_one({"TagName":tag}) == None # true if tag does not exist
-    print(db.Tags.find_one({"TagName":tag}))
+    # print(db.Tags.find_one({"TagName":tag}))
     if(checkTag == True):
       tagId = createIdTag(db)
       tags={
