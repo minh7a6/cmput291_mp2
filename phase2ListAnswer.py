@@ -58,6 +58,8 @@ def listAns(db, qid):
 def func_test():
     url = "mongodb://localhost:50001"
     client = pymongo.MongoClient(url)
-    print(listAns(client["291db"], "29"))
+    print(listAns(client["291db"], "1"))
 if __name__ == "__main__":
     func_test()
+
+

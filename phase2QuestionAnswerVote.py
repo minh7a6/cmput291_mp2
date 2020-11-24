@@ -43,6 +43,7 @@ def vote(db,pid,uid):
         score = db.Posts.find_one({"Id":pid})["Score"]+1
         #print(db.Posts.find_one({"Id":pid})["Score"])
         db.Posts.update({"Id":pid},{"$set":{"Score":score}})
+        print("Success!")
         #print(db.Posts.find_one({"Id":pid}))
     else:
         print("You have already voted for this post")

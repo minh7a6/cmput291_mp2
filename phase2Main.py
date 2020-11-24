@@ -98,14 +98,15 @@ def main_menu():
         print("-------------------------- Main Menu -------------------------- ")
         print("Hello! What would you like to do today?")
         print("1: Post a Question")
-        print("2: Seach for Question")
+        print("2: Search for Question")
         print("3: Exit")
         choice = input("Please choose an option: ")
         if choice == "1":
             postQuestion(uid, db)
         elif choice == "2":
             qid = SearchQuestion(db)
-            QuestionScreen(qid, uid, db)
+            if qid is not None:
+                QuestionScreen(qid, uid, db)
         elif choice == "3":
             break
         else:
