@@ -37,7 +37,7 @@ def vote(db,pid,uid):
                 "CreationDate": today
             }
         votesCollection = db["Votes"]
-        votesCollection.insert(vote)
+        votesCollection.insert_one(vote)
         #print(db.Votes.find_one({"$and": [{"Id":id}]}))
         #db.Votes.find_one({"Id":pid})
         score = db.Posts.find_one({"Id":pid})["Score"]+1
