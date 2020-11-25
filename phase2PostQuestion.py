@@ -2,8 +2,15 @@ from pymongo import MongoClient
 import datetime 
 import pymongo
 from bson.objectid import ObjectId
+#Function: checkDupTag
+#Arg: x (list of tags the user has input)
+#Return: list(dict.fromkeys(x)) (this returns a list of tags that have no duplicates)
+#Desc : remove duplicate tags
 def checkDupTag(x):
   return list(dict.fromkeys(x))
+# Function: postQuestion
+#Arg :  uid (the user id entered at the start) , db (291 database)
+#Desc:allow user to post question in database
 
 def postQuestion(uid,db):
   #uid = "11" #change it later

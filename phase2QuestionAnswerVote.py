@@ -10,6 +10,9 @@ from bson.objectid import ObjectId
 #             break
 #         counter = counter +1
 #     return counter
+#Function: vote
+#args: db (291 database) , pid (post id), uid (user id)
+#Description: allow users to vote on question / answer
 def vote(db,pid,uid):
     print("Vote page")
     checkVote = False
