@@ -1,14 +1,15 @@
 from pymongo import MongoClient
 import datetime
-def createId(db):
-    empty = False
-    counter =1
-    while(empty == False):
-        if(db.Votes.find_one({"Id":str(counter)}) == None):
-            empty =True
-            break
-        counter = counter +1
-    return counter
+from bson.objectid import ObjectId
+# def createId(db):
+#     empty = False
+#     counter =1
+#     while(empty == False):
+#         if(db.Votes.find_one({"Id":str(counter)}) == None):
+#             empty =True
+#             break
+#         counter = counter +1
+#     return counter
 def vote(db,pid,uid):
     print("Vote page")
     checkVote = False
@@ -19,30 +20,32 @@ def vote(db,pid,uid):
         today = str(datetime.datetime.now())
         today = today[:-3]
         today ='T'.join(today.split())
-        id = str(createId(db))
         vote = {}
         if(uid ==""):
             vote = {
-            "Id": id,
             "PostId": pid,
             "VoteTypeId": "2",
             "CreationDate": today
         }
         else:
             vote = {
-                "Id": id,
                 "PostId": pid,
                 "VoteTypeId": "2",
                 "UserId": uid,
                 "CreationDate": today
             }
         votesCollection = db["Votes"]
-        votesCollection.insert(vote)
+        x = votesCollection.insert_one(vote)
+        newId = str(x.inserted_id)
+        filter = {"_id": ObjectId(newId)}
+        newvalues = { "$set": { 'Id': newId } } 
+        votesCollection.update_one(filter, newvalues)
         #print(db.Votes.find_one({"$and": [{"Id":id}]}))
         #db.Votes.find_one({"Id":pid})
         score = db.Posts.find_one({"Id":pid})["Score"]+1
         #print(db.Posts.find_one({"Id":pid})["Score"])
         db.Posts.update({"Id":pid},{"$set":{"Score":score}})
+        print("Success!")
         #print(db.Posts.find_one({"Id":pid}))
     else:
         print("You have already voted for this post")

@@ -1,3 +1,4 @@
 .vscode/**
 venv/
 phase2Search.py
+./__pycache__/
