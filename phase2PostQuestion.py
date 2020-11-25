@@ -2,6 +2,9 @@ from pymongo import MongoClient
 import datetime 
 import pymongo
 from bson.objectid import ObjectId
+def checkDupTag(x):
+  return list(dict.fromkeys(x))
+
 def postQuestion(uid,db):
   #uid = "11" #change it later
   #url = "mongodb://localhost:" + str(50001)
@@ -11,7 +14,8 @@ def postQuestion(uid,db):
   title = input("PLease input a title: ")
   body =  input("Please input the body:  ")
   tags = input("Please input tags (please serpate each tag by a space): ")
-  tagsArray = tags.split(" ")
+  tagsTempArray = tags.split(" ")
+  tagsArray = checkDupTag(tagsTempArray)
   tagString = "<"+"><".join(tagsArray)+">"
   postTypeId = 1
   today = str(datetime.datetime.now())

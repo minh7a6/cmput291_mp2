@@ -7,6 +7,7 @@ def disp_w_update(args, postColl):
     cnt = ans["ViewCount"] + 1
     newvalues = { "$set": {'ViewCount': cnt} } 
     postColl.update_one(filter, newvalues)
+    ans = postColl.find_one({"_id": ObjectId(args)})
     script = ""
     for j in ans:
         script += j + ": " + str(ans[j]) + "\r\n"
