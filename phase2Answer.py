@@ -2,6 +2,10 @@
 import pymongo
 import datetime
 from bson.objectid import ObjectId
+'''
+giveAns(uid, db, qid)
+this function is for the component Question-Action Answer with input as uid for user ID, db for database and qid is the question ID
+'''
 def giveAns(uid, db, qid):
     post = db["Posts"]
     print("\r\n----------------------------------------- Give Answer -----------------------------------------\r\n")

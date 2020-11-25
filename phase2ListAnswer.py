@@ -1,16 +1,30 @@
 import pymongo
 import time
+
+'''
+truncate(args)
+checking if the args are longer than 80 characters
+'''
 def truncate(args):
     if len(args) > 80:
         return args[:80] + "..."
     else: 
         return args
+'''
+checkNone(args)
+This function is to check if argument is a None type or not, returning the args if it is not none, "None" otherwise
+'''
 def checkNone(args):
     if args is None:
         return "None"
     else:
         return args
 
+
+'''
+listAns(db, qid)
+This function is designed to list the answer post regarding to that qid.
+'''
 def listAns(db, qid):
     postCol = db["Posts"]
     x = postCol.find_one({"Id": qid},{"AcceptedAnswerId": 1, "_id": 0})

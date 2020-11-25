@@ -1,6 +1,11 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+
+'''
+disp_w_update(args, postColl)
+The function is to update the post Column and display the post
+'''
 def disp_w_update(args, postColl):
     ans = postColl.find_one({"_id": ObjectId(args)})
     filter = {"_id": ObjectId(args)}
@@ -13,6 +18,11 @@ def disp_w_update(args, postColl):
         script += j + ": " + str(ans[j]) + "\r\n"
     print(script) 
     return ans["Id"]
+
+'''
+SearchQuestion(db)
+The function is to search a question using the full text search from MongoDB
+'''
 
 def SearchQuestion(db):
     print("\r\n------------------------------------------------- Search Menu -------------------------------------------------\r\n")
