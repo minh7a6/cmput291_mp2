@@ -2,6 +2,10 @@ import json
 from pymongo import MongoClient
 import sys
 from os import path
+'''
+phase1(args)
+this function is designed to import the json file to the 291db database for the server
+'''
 def phase1(args):
     if len(args) != 4:
         sys.exit("Need all 3 of the files")
